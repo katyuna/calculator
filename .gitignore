@@ -39,5 +39,12 @@ out/
 # Исключение папки с результатами тестов
 target/allure-results/
 
+
 # Исключение сгенерированных отчетов
 target/allure-report/
+.allure/
+allure-results/
+target/classes/calculator/model/
+target/classes/utils/
+target/maven-status/
+target/surefire-reports/
