@@ -18,26 +18,7 @@
                 <version>3.1.2</version>
                 <configuration>
                     <useModulePath>false</useModulePath>
-                    <dependenciesToScan>
-                        <dependency>org.junit.jupiter:junit-jupiter-api</dependency>
-                        <dependency>org.junit.jupiter:junit-jupiter-engine</dependency>
-                    </dependenciesToScan>
                 </configuration>
-            </plugin>
-
-            <!-- Плагин для генерации отчетов Allure -->
-            <plugin>
-                <groupId>io.qameta.allure</groupId>
-                <artifactId>allure-maven</artifactId>
-                <version>2.15.2</version> <!-- Обновленная версия Allure Maven -->
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>serve</goal> <!-- Для запуска отчета в браузере -->
-                            <goal>report</goal> <!-- Генерация отчета -->
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -75,7 +56,7 @@
         <dependency>
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
-            <version>2.24.0</version> <!-- Совместимая версия Allure для JUnit 5 -->
+            <version>2.24.0</version>
             <scope>test</scope>
         </dependency>
 
@@ -90,21 +71,39 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.7.32</version> <!-- Стабильная версия SLF4J -->
+            <version>1.7.32</version>
         </dependency>
 
         <!-- Logback для SLF4J -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.6</version> <!-- Совместимая версия Logback с SLF4J 1.7.x -->
-        </dependency>
-
-        <!-- Logback для SLF4J (опционально) -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-core</artifactId>
-            <version>1.2.6</version> <!-- Совместимая версия Logback -->
+            <version>1.2.6</version>
         </dependency>
     </dependencies>
+
+    <profiles>
+        <profile>
+            <id>allure</id>
+            <build>
+                <plugins>
+                    <!-- Плагин для генерации отчетов Allure -->
+                    <plugin>
+                        <groupId>io.qameta.allure</groupId>
+                        <artifactId>allure-maven</artifactId>
+                        <version>2.15.2</version>
+                        <executions>
+                            <execution>
+                                <phase>verify</phase>
+                                <goals>
+                                    <goal>report</goal>
+                                    <goal>serve</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>

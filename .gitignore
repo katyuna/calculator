@@ -35,3 +35,9 @@ out/
 
 ### VS Code ###
 .vscode/
+
+# Исключение папки с результатами тестов
+target/allure-results/
+
+# Исключение сгенерированных отчетов
+target/allure-report/
