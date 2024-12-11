@@ -2,8 +2,8 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
-
 import static io.restassured.RestAssured.given;
+
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class RepaymentTest extends BaseTest {
@@ -38,10 +38,23 @@ public class RepaymentTest extends BaseTest {
                 .body(paymentJSON)
                 .when()
                 .post(paymentEndpoint);
+        System.out.println("Response Body: " + response.getBody().asString());
         Allure.step("Проверяем статус ответа");
         response.then().statusCode(200);
         System.out.println("Тест 2: Выдача займа. Создание займа завершено");
     }
 
-
+    @DisplayName("Получение графика выплат")
+    @Description("Получить график выплат")
+    @Test
+    @Order(3)
+    public void testSchedule() {
+        Response response = given()
+                .header("Content-Type", "application/json")
+                .queryParam("calculation_id", calculationId)
+                .queryParam("calculation_date", currentDate)
+                .when()
+                .post(scheduleEndpoint);
+        System.out.println("Response Body: " + response.getBody().asString());
+    }
 }

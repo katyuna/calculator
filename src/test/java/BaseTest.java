@@ -15,11 +15,14 @@ public class BaseTest {
     // Endpoints
     protected static String calculationEndpoint;
     protected static String paymentEndpoint;
+    protected static  String scheduleEndpoint;
 
     // Variables
     protected static String calculationId;
     protected static String paymentId;
     protected static String currentDateISO;
+    protected static String currentDate;
+    protected static int loanTerm;
 
     // Calculation
     protected static SpecialTerms specialTerms;
@@ -44,16 +47,21 @@ public class BaseTest {
         //Endpoints
         calculationEndpoint = getEndpoint("/v2/internal/calculation/create");
         paymentEndpoint = getEndpoint("/v2/internal/calculation/append");
+        scheduleEndpoint = getEndpoint("/v2/internal/calculation/schedule");
 
         //IDs and dates
         calculationId = TestDataGenerator.generateId();
         paymentId = TestDataGenerator.generateId();
         currentDateISO = TestDataGenerator.getCurrentDateTimeISO();
+        currentDate = TestDataGenerator.getCurrentDate();
+        loanTerm = TestDataGenerator.getTotalDaysUntilMonday(90);
+
 
         //Calculation
-        specialTerms = new SpecialTerms(1.0, 1.0, 98, 1.0, 1);
+        specialTerms = new SpecialTerms(1.0, 1.0, loanTerm, 1.0, 1);
         calculation = new Calculation(calculationId, "simple", specialTerms);
         calculationJSON = PojoJsonParser.parseToJson(calculation);
+
         //Payment
         payment = new Payment(paymentId, calculationId, currentDateISO, "payment", 10000000);
         // Создаем список с одним элементом и конвертируем его в JSON
