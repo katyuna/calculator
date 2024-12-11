@@ -1,9 +1,6 @@
 package utils;
 
-import calculator.model.calculation.Calculation;
 import com.google.gson.Gson;
-
-import java.lang.reflect.Type;
 
 public class PojoJsonParser {
     private static final Gson gson = new Gson();
