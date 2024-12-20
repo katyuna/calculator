@@ -1,3 +1,6 @@
+package calculator;
+
+import basetest.BaseTest;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;

@@ -1,3 +1,6 @@
+package calculator;
+
+import basetest.BaseTest;
 import calculator.model.calculation.Calculation;
 import calculator.model.calculation.SpecialTerms;
 
@@ -18,7 +21,7 @@ import static calculator.testdata.TestDataGenerator.getTotalDaysUntilMonday;
 import static io.restassured.RestAssured.given;
 
 
-public class EndOfLoanNotMondayTest extends BaseTest{
+public class EndOfLoanNotMondayTest extends BaseTest {
     @DisplayName("400, если последняя выплата по графику приходится на вт - пт")
     @Description("Проверка, что если последняя выплата приходится на вт - пт, то будет ошибка 400 и сообщение вида End date should be MONDAY, 2025-03-30 is not")
     @Test

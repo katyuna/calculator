@@ -1,11 +1,11 @@
+package basetest;
+
 import calculator.model.calculation.Calculation;
 import calculator.model.calculation.SpecialTerms;
 import calculator.model.payment.Payment;
 import calculator.testdata.TestDataGenerator;
-import io.qameta.allure.Allure;
 import io.restassured.RestAssured;
 import io.restassured.config.SSLConfig;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import utils.PojoJsonParser;
 
@@ -45,7 +45,7 @@ public class BaseTest {
         //Устанавливаем базовый URL
         RestAssured.baseURI = "https://seller-loans-ingress-controller.seller-loans.k8s.stage-xc/loans-calculator";
 
-        // Генерация уникальных данных перед всеми тестами
+        // Генерация данных перед всеми тестами
         //Endpoints
         calculationEndpoint = getEndpoint("/v2/internal/calculation/create");
         paymentEndpoint = getEndpoint("/v2/internal/calculation/append");
