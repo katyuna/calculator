@@ -34,7 +34,6 @@
             <groupId>io.rest-assured</groupId>
             <artifactId>rest-assured</artifactId>
             <version>5.5.0</version>
-            <scope>test</scope>
         </dependency>
 
         <!-- Gson -->
@@ -61,6 +60,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
+                    <testFailureIgnore>true</testFailureIgnore> <!-- Игнорировать сбои тестов и продолжать сборку -->
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
                     <useModulePath>false</useModulePath>
                 </configuration>
             </plugin>

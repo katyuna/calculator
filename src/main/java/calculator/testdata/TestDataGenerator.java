@@ -45,6 +45,4 @@ public class TestDataGenerator {
         // Вернуть общее количество дней
         return baseDays + daysToMonday;
     }
-
-
 }

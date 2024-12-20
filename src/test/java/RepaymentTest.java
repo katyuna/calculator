@@ -6,6 +6,8 @@ import org.junit.jupiter.api.*;
 import java.util.List;
 import java.util.Map;
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class RepaymentTest extends BaseTest {
@@ -82,14 +84,25 @@ public class RepaymentTest extends BaseTest {
             totalAmountExp2 += amountExp2;
         }
         System.out.println("Сумма по всем amount_exp2: " + totalAmountExp2);
+        System.out.println("Тело кредита: " + payment.amountExp2);
+
+        // Проверка условия с JUnit
+        assertTrue(payment.amountExp2 < totalAmountExp2,
+                "Ожидается, что тело кредита меньше чем конечная выплата по кредиту, которая включает проценты, комиссии и пени");
+
+        Allure.step("Проверка, что  общая сумма по всему графику платежей (сумма всех платежей) больше, чем тело кредита на сумму процентов, комиссий и пени");
+
+        // Суммирование проценты + комиссии + пени
+        int totalPerComPenAmountExp2 = 0;
+        for (Object schedule : scheduleList) {
+            int commissionExp2 = (int) ((Map<String, Object>) schedule).get("commission_exp2");
+            int percentsAmountExp2 = (int) ((Map<String, Object>) schedule).get("percents_amount_exp2");
+            int penaltyExp2 = (int) ((Map<String, Object>) schedule).get("penalty_exp2");
+            totalPerComPenAmountExp2  += commissionExp2 + percentsAmountExp2 + penaltyExp2;
+        }
+        System.out.println("Сумма процентов, комиссий и пени: " + totalPerComPenAmountExp2);
+        // Проверка с JUnit
+        assertEquals(totalAmountExp2 - payment.amountExp2, totalPerComPenAmountExp2, "Общая сумма по всему графику платежей больше, чем тело кредита на сумму процентов и комиссий");
     }
-
-
-
-
-
-
-
-
-    }
+}
 
