@@ -1,12 +1,21 @@
 package loans;
 
 import basetest.BaseTest;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
+import utils.PojoJsonParser;
+
+import java.time.DayOfWeek;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 
 import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class TestForScheduleFromLoansApi extends BaseTest {
@@ -36,9 +45,12 @@ public class TestForScheduleFromLoansApi extends BaseTest {
         Allure.step("Проверка структуры JSON-ответа");
         String responseBody = response.getBody().asString();
         Assertions.assertNotNull(responseBody, "Ответ от API не должен быть пустым");
-        // Добавьте дополнительные проверки, если известна структура ответа
-        System.out.println(responseBody);
-    }
 
+        Allure.step("Проверка дней недели в графике");
+
+
+    }
 }
+
+
 
